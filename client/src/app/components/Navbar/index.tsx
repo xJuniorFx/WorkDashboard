@@ -9,12 +9,12 @@ const Navbar = () => {
 			Search bar
 			<div className="flex items-center gap-8">
 				<div className="relative flex h-min w-[200px]">
-					<Search className="absolute lest left-[4px] top-1/2 mr-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white" />
+					<Search className="absolute left-[4px] top-1/2 mr-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white" />
 					<input
 						className="w-full rounded border-none bg-gray-100 p-2 pl-8 placeholder-gray-500 focus:border-transparent focus:outline-none dark:bg-gray-700 dark:text-white"
 						type="Search"
 						placeholder="Search..."
-					></input>
+					/>
 				</div>
 			</div>
 			{/** Icons */}
