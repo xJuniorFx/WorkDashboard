@@ -1,12 +1,29 @@
 import React from 'react';
-import { Search, Settings } from 'lucide-react';
+import { Menu, Moon, Search, Settings, Sun } from 'lucide-react';
 import Link from 'next/link';
+import { useAppDispatch, useAppSelector } from '@/app/redux';
+import { setIsDarkModeActive, setIsSideBarCollapsed } from '@/state';
 
 const Navbar = () => {
+	const dispatch = useAppDispatch();
+	const isSideBarCollapsed = useAppSelector(
+		(state) => state.global.isSideBarCollapsed
+	);
+	const isDarkModeActive = useAppSelector(
+		(state) => state.global.isDarkModeActive
+	);
+
 	return (
 		<div className="flex items-center justify-between bg-white px-4 py-3 dark:bg-black">
 			{/* Search Bar */}
 			<div className="flex items-center gap-8">
+				{!isSideBarCollapsed ? null : (
+					<button
+						onClick={() => dispatch(setIsSideBarCollapsed(!isSideBarCollapsed))}
+					>
+						<Menu className="h-8 w-8 dark:text-white" />
+					</button>
+				)}
 				<div className="relative flex h-min w-[200px]">
 					<Search className="absolute left-[4px] top-1/2 mr-2 h-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white" />
 					<input
@@ -18,6 +35,20 @@ const Navbar = () => {
 			</div>
 			{/** Icons */}
 			<div className="flex items-center">
+				<button
+					onClick={() => dispatch(setIsDarkModeActive(!isDarkModeActive))}
+					className={
+						isDarkModeActive
+							? `rounded h-min w-min p-2  dark:hover: bg-gray-700`
+							: `rounded h-min w-min p-2 hover:bg-gray-100`
+					}
+				>
+					{isDarkModeActive ? (
+						<Sun className="h-6 w-6 cursor-pointer dark:text-white" />
+					) : (
+						<Moon className="h-6 w-6 cursor-pointer dark:text-white" />
+					)}
+				</button>
 				<Link
 					href="/settings"
 					className="h-min w-min rounded p-2 hover:bg-gray-100"
