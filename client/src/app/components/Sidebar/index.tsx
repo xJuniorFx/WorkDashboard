@@ -25,8 +25,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const Sidebar = () => {
-	const [ShowProjects, SetShowProjects] = useState<boolean>(true);
-	const [ShowPriorities, SetShowPriorities] = useState<boolean>(true);
+	const [ShowProjects, SetShowProjects] = useState<boolean>(false);
+	const [ShowPriorities, SetShowPriorities] = useState<boolean>(false);
 
 	const dispatch = useAppDispatch();
 	const isSideBarCollapsed = useAppSelector(
