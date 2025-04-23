@@ -2,7 +2,10 @@ import React from 'react';
 import { Menu, Moon, Search, Settings, Sun } from 'lucide-react';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/app/redux';
-import { setIsDarkModeActive, setIsSideBarCollapsed } from '@/state';
+import {
+	setIsDarkModeActive,
+	setIsSideBarCollapsed,
+} from '@/state/slices/globalSlice';
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
@@ -14,7 +17,7 @@ const Navbar = () => {
 	);
 
 	return (
-		<div className="flex items-center justify-between bg-white px-4 py-3 dark:bg-black">
+		<div className="flex items-center justify-between bg-white pl-8 pr-4 py-3 dark:bg-black">
 			{/* Search Bar */}
 			<div className="flex items-center gap-8">
 				{!isSideBarCollapsed ? null : (
