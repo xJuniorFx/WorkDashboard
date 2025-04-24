@@ -25,14 +25,14 @@ const Sidebar = () => {
 
 	const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 
 		dark:bg-black overflow-y-auto bg-white ${
-			isSideBarCollapsed ? 'w-0 hidden' : 'w-65'
+			isSideBarCollapsed ? 'w-0 hidden' : 'w-64'
 		} `;
 
 	return (
 		<div className={sidebarClassNames}>
 			<div className="flex h-[100%] w-full flex-col justify-start">
 				{/* TOP LOGO */}
-				<div className="z-50 flex min-h-[45px] w-64 items-center justify-between bg-white px-[1.5rem] pt-3 dark:bg-black">
+				<div className="z-50 flex min-h-[45px] w-64 items-center justify-between bg-white px-[1.5rem] pt-3 pb-1 dark:bg-black">
 					<div className="text-xl font-bold text-gray-700 dark:text-white">
 						Orion
 					</div>
