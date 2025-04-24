@@ -37,7 +37,7 @@ const Navbar = () => {
 				</div>
 			</div>
 			{/** Icons */}
-			<div className="flex items-center">
+			<div className="flex gap-2 items-center">
 				<button
 					onClick={() => dispatch(setIsDarkModeActive(!isDarkModeActive))}
 					className={
