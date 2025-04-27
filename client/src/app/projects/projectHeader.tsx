@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import TabButton from '@/components/TabButton';
+import TabButton from '@/app/projects/BoardView/tabButton';
 import { Clock, Filter, Grid3x3, List, Share2, Table } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -18,7 +18,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
 				<Header name={'Product Design Development'} />
 			</div>
 			<div className="flex flex-col gap-2 border-y border-gray-200 pb-[8px] pt-2 dark:border-stroke-dark md:flex-row md:items-center md:justify-between">
-				<div className="flex flex-wrap items-center gap-2 md:gap-4">
+				<div className="flex flex-wrap items-center sm:gap-6 gap-4">
 					<TabButton
 						name="Board"
 						icon={<Grid3x3 className="h-5 w-5" />}
