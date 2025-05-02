@@ -3,7 +3,8 @@ import { useDrag } from 'react-dnd';
 import { format } from 'date-fns';
 import { Task as TaskType } from '@/state/models/task';
 import Image from 'next/image';
-import { EllipsisVertical } from 'lucide-react';
+import { EllipsisVertical, MessageSquareMore } from 'lucide-react';
+import { PriorityTag } from '@/components/PriorityTag';
 
 type TaskProps = {
 	task: TaskType;
@@ -27,24 +28,6 @@ const Task = ({ task }: TaskProps) => {
 		: '';
 
 	const numberOfComments = (task.comments && task.comments.length) || 0;
-
-	const PriorityTag = ({ priority }: { priority: TaskType['priority'] }) => (
-		<div
-			className={`rounded-full px-2 py-1 text-xs font-semibold ${
-				priority === 'Urgent'
-					? 'bg-red-200 '
-					: priority === 'High'
-					? 'bg-yellow-200'
-					: priority === 'Medium'
-					? 'bg-green-200'
-					: priority === 'Low'
-					? 'bg-blue-200'
-					: 'bg-gray-200'
-			}`}
-		>
-			{priority}
-		</div>
-	);
 
 	return (
 		<div
@@ -94,7 +77,7 @@ const Task = ({ task }: TaskProps) => {
 					)}
 				</div>
 
-				<div className="text-sm text-gray-600 dark:text-neutral-300 my-1">
+				<div className="text-sm text-gray-700 dark:text-neutral-200 my-1">
 					{formattedStartDate && <span>{formattedStartDate} - </span>}
 					{formattedDueDate && <span>{formattedDueDate}</span>}
 				</div>
@@ -103,6 +86,37 @@ const Task = ({ task }: TaskProps) => {
 					{task.description}
 				</p>
 				<div className="mt-4 border-t border-gray-200 dark:border-x-stroke-dark" />
+
+				<div className="mt-3 flex items-center justify-between">
+					<div className="flex -space-x-[6px] overflow-hidden">
+						{task.assignee && (
+							<Image
+								key={task.assignee.userId}
+								src={`/${task.assignee.profilePictureUrl!}`}
+								alt={task.assignee.username}
+								width={40}
+								height={40}
+								className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secundary"
+							/>
+						)}
+						{task.author && (
+							<Image
+								key={task.author.userId}
+								src={`/${task.author.profilePictureUrl!}`}
+								alt={task.author.username}
+								width={40}
+								height={40}
+								className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secundary"
+							/>
+						)}
+					</div>
+					<div className="flex items-center gap-1 text-gray-700 dark:text-neutral-200">
+						<MessageSquareMore size={20} />
+						<span className="mt-1 text-sm dark:text-neutral-400">
+							{numberOfComments}
+						</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
