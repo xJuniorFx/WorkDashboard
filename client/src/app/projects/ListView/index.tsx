@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import TaskCard from '@/components/TaskCard';
+import TaskCard from '@/app/projects/ListView/TaskList';
 import { useGetTasksQuery } from '@/state/api/taskService';
 import { Task } from '@/state/models/task';
 import React from 'react';
@@ -20,7 +20,7 @@ const ListView = ({ id, setIsModalNewTaskOpen }: ListProps) => {
 	if (error) return <div>An error ocurred while fetching the tasks</div>;
 
 	return (
-		<div className="px-4 pb-8 xl:px-6">
+		<div className="p-4 pb-8 xl:p-6">
 			<div className="pt-5">
 				<Header name="List" />
 			</div>
