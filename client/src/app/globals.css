@@ -20,3 +20,23 @@ body,
 	@apply bg-white;
 	@apply dark:bg-black;
 }
+
+/* TIMELINE STYLING */
+.timeline ._3eULf {
+	@apply text-center;
+}
+
+.timeline ._3_ygE {
+	@apply rounded-tl-md border border-r-0  dark:border-stroke-dark;
+}
+.timeline ._3ZbQT {
+	@apply dark:border-stroke-dark;
+}
+.timeline ._34SS0 {
+	@apply dark:bg-dark-secundary;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+}
