@@ -82,7 +82,7 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 						tasks={ganttTasks}
 						{...displayOptions}
 						columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
-						listCellWidth="150px"
+						listCellWidth="160px"
 						barBackgroundColor={isDarkMode ? '#2563EB ' : '#2563EB '}
 						barBackgroundSelectedColor={isDarkMode ? '#2563EB ' : '#2563EB '}
 					/>
