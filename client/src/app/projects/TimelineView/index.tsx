@@ -13,7 +13,7 @@ type TimeLineProps = {
 type TaskTypeItems = 'task' | 'milestone' | 'project';
 
 const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
-	const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+	const isDarkMode = useAppSelector((state) => state.global.isDarkModeActive);
 
 	const {
 		data: tasks,
@@ -55,12 +55,8 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 	return (
 		<div className="px-4 xl:px-6">
 			<div className="flex flex-wrap items-center justify-between gap-2 py-5">
-				<Header name=" Project Tasks Timeline" />
 				<div className="flex w-64">
-					<div
-						className={'w-2 !bg-[#2563EB] rounded-s-lg'}
-						style={{ backgroundColor: '#2563EB' }}
-					/>
+					<div className={'w-2 rounded-s-lg bg-[#e42974] dark:bg-[#2563EB] '} />
 					<select
 						className="
                         focus:shadow-outline block w-full appearance-none rounded border-gray-400 bg-white
@@ -79,19 +75,22 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 			<div className="overflow-hidden rounded-md dark:bg-dark-secundary dark:text-white">
 				<div className="timeline">
 					<Gantt
+						key={isDarkMode ? 'dark' : 'light'}
 						tasks={ganttTasks}
 						{...displayOptions}
 						columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
 						listCellWidth="160px"
-						barBackgroundColor={isDarkMode ? '#2563EB ' : '#2563EB '}
-						barBackgroundSelectedColor={isDarkMode ? '#2563EB ' : '#2563EB '}
+						barBackgroundColor={isDarkMode ? '#2563EB' : '#e42974'}
+						barBackgroundSelectedColor={isDarkMode ? '#2563EB' : '#e42974'}
 					/>
 				</div>
 				<div className="px-4 pb-5 pt-1">
 					<button
-						className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600  "
+						className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
 						onClick={() => setIsModalNewTaskOpen(true)}
-					/>
+					>
+						Add New Task
+					</button>
 				</div>
 			</div>
 		</div>
