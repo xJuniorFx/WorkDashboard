@@ -63,6 +63,20 @@ body,
 	@apply text-sm font-bold text-[#1d1f21] dark:text-white;
 }
 
+.timeline .bar text {
+	fill: #1d1f21;
+}
+
+.dark .timeline .bar text {
+	fill: white;
+}
+.timeline .today rect {
+	fill: rgba(234, 119, 168, 0.4);
+}
+
+.dark .timeline .today rect {
+	fill: rgba(37, 99, 235, 0.3);
+}
 ::-webkit-scrollbar {
 	width: 0px;
 	height: 0px;
