@@ -27,7 +27,7 @@ const TaskColumn = ({
 
 	const taskCount = tasks.filter((task) => task.status === status).length;
 
-	const statusColor: any = {
+	const statusColor: Record<string, string> = {
 		'To Do': '#2563EB',
 		'Work In Progress': '#ebe425',
 		'Under Review': '#eb7b25',
