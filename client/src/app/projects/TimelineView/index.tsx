@@ -1,5 +1,4 @@
 import { useAppSelector } from '@/app/redux';
-import Header from '@/components/Header';
 import { useGetTasksQuery } from '@/state/api/taskService';
 import { DisplayOption, Gantt, ViewMode } from 'gantt-task-react';
 import React, { useMemo, useState } from 'react';
@@ -55,6 +54,12 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 	return (
 		<div className="px-4 xl:px-6">
 			<div className="flex flex-wrap items-center justify-between gap-2 py-5">
+				<button
+					className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+					onClick={() => setIsModalNewTaskOpen(true)}
+				>
+					Add New Task
+				</button>
 				<div className="flex w-64">
 					<div className={'w-2 rounded-s-lg bg-[#e42974] dark:bg-[#2563EB] '} />
 					<select
@@ -83,14 +88,6 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 						barBackgroundColor={isDarkMode ? '#2563EB' : '#e42974'}
 						barBackgroundSelectedColor={isDarkMode ? '#2563EB' : '#e42974'}
 					/>
-				</div>
-				<div className="px-4 pb-5 pt-1">
-					<button
-						className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
-						onClick={() => setIsModalNewTaskOpen(true)}
-					>
-						Add New Task
-					</button>
 				</div>
 			</div>
 		</div>
