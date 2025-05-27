@@ -1,19 +1,19 @@
 import { useAppSelector } from '@/app/redux';
 import { useGetTasksQuery } from '@/state/api/taskService';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import React from 'react';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
+import React, { useState } from 'react';
 
 type Props = {
 	id: string;
 	setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
 
-const statusColor: Record<string, string> = {
-	'To Do': '#2563EB',
-	'Work In Progress': '#ebe425',
-	'Under Review': '#eb7b25',
-	Completed: '#25eb36',
+const statusClassMap: Record<string, string> = {
+	'To Do': 'bg-[#235fe077] dark:bg-[#192c58] ',
+	'Work In Progress': 'bg-[#ebe5257a] dark:bg-[#565418]',
+	'Under Review': 'bg-[#eb7b257f] dark:bg-[#5b3a21]',
+	Completed: 'bg-[#25eb357e] dark:bg-[#215b26]',
 };
 
 const columns: GridColDef[] = [
@@ -31,11 +31,17 @@ const columns: GridColDef[] = [
 		field: 'status',
 		headerName: 'Status',
 		width: 130,
-		renderCell: (params) => (
-			<span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-				{params.value}
-			</span>
-		),
+		renderCell: (params) => {
+			const status = params.value;
+			const statusClasses = statusClassMap[status] || 'bg-gray-200';
+			return (
+				<span
+					className={`inline-flex rounded-full px-2 text-xs font-semibold leading-5 ${statusClasses}`}
+				>
+					{status}
+				</span>
+			);
+		},
 	},
 	{
 		field: 'priority',
@@ -72,6 +78,8 @@ const columns: GridColDef[] = [
 ];
 
 const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
+	const [rowSelectionModel, setRowSelectionModel] =
+		useState<GridRowSelectionModel>([]);
 	const isDarkMode = useAppSelector((state) => state.global.isDarkModeActive);
 
 	const {
@@ -97,6 +105,19 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 				rows={tasks || []}
 				columns={columns}
 				className={dataGridClassNames}
+				sx={dataGridSxStyles(isDarkMode)}
+				rowSelectionModel={rowSelectionModel}
+				onRowSelectionModelChange={(newSelection: GridRowSelectionModel) => {
+					if (
+						rowSelectionModel.length === 1 &&
+						newSelection.length === 1 &&
+						rowSelectionModel[0] === newSelection[0]
+					) {
+						setRowSelectionModel([]);
+					} else {
+						setRowSelectionModel(newSelection);
+					}
+				}}
 			/>
 		</div>
 	);
