@@ -41,9 +41,9 @@ export const dataGridSxStyles = (isDarkMode: boolean) => {
 
 		'& .MuiDataGrid-row.Mui-selected': {
 			backgroundColor: isDarkMode
-				? 'rgba(37, 99, 235, 0.3)' // azul claro no dark
-				: 'rgba(234, 119, 168, 0.4)', // rosa claro no light
-			border: `1px solid ${isDarkMode ? '#2563EB' : '#e42974'}`, // adiciona borda azul no dark e rosa no light
+				? 'rgba(37, 99, 235, 0.3)' // isDarkMode = blue
+				: 'rgba(234, 119, 168, 0.4)', // !isDarkMode = pink
+			border: `1px solid ${isDarkMode ? '#2563EB' : '#e42974'}`, //
 		},
 		'& .MuiDataGrid-row.Mui-selected:hover': {
 			backgroundColor: isDarkMode
