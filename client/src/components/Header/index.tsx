@@ -14,8 +14,8 @@ const Header = ({ name, buttoComponent, isSmallText }: Props) => {
 				<h3 className="flex items-center text-lg font-bold dark:text-white">
 					{name}
 				</h3>
+				<div>{buttoComponent}</div>
 			</div>
-			{buttoComponent}
 		</div>
 	);
 };
