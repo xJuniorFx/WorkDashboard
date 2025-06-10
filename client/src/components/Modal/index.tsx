@@ -21,7 +21,7 @@ const Modal = ({ children, isOpen, onClose, name }: Props) => {
 					isSmallText
 					buttoComponent={
 						<button
-							className="flex h-7 w-7 items-center justify-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+							className="flex h-7 w-7 items-center justify-center rounded-full bg-[#e42974] text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
 							onClick={onClose}
 						>
 							<X size={18} />
