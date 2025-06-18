@@ -21,6 +21,15 @@ const ListView = ({ id, setIsModalNewTaskOpen }: ListProps) => {
 
 	return (
 		<div className="p-4 pb-8 xl:p-6">
+			<div className="gap-2 py-5">
+				<button
+					className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+					onClick={() => setIsModalNewTaskOpen(true)}
+				>
+					Add New Task
+				</button>
+			</div>
+
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 				{tasks?.map((task: Task) => (
 					<TaskCard key={task.id} task={task} />
