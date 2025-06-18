@@ -13,25 +13,6 @@ const TaskCard = ({ task }: Props) => {
 
 	return (
 		<div className="rounded-2xl bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-dark-secundary dark:text-white">
-			{task.attachments && task.attachments.length > 0 && (
-				<div>
-					<div className="mb-2">
-						<strong className="bold">Attachments</strong>
-					</div>
-					<div className="mb-3">
-						{task.attachments && task.attachments.length > 0 && (
-							<Image
-								src={`/${task.attachments[0].fileURL}`}
-								alt={task.attachments[0].fileName}
-								width={400}
-								height={200}
-								className="rounded-md"
-							/>
-						)}
-					</div>
-				</div>
-			)}
-
 			<h3 className="mb-2 text-xl font-semibold">{task.title}</h3>
 
 			<div className="mb-2">
@@ -73,9 +54,6 @@ const TaskCard = ({ task }: Props) => {
 						? format(new Date(task.dueDate), 'dd/MM/yyyy')
 						: 'Not set'}
 				</p>
-			</div>
-
-			<div className="text-md text-gray-500 dark:text-gray-400">
 				<p>
 					<strong>Author:</strong> {task.author?.username || 'Unknown'}
 				</p>
@@ -83,6 +61,25 @@ const TaskCard = ({ task }: Props) => {
 					<strong>Assignee:</strong> {task.assignee?.username || 'Unassigned'}
 				</p>
 			</div>
+
+			{task.attachments && task.attachments.length > 0 && (
+				<div>
+					<div className="mb-2">
+						<strong className="bold">Attachments:</strong>
+					</div>
+					<div className="mb-3">
+						{task.attachments && task.attachments.length > 0 && (
+							<Image
+								src={`/${task.attachments[0].fileURL}`}
+								alt={task.attachments[0].fileName}
+								width={400}
+								height={200}
+								className="rounded-md"
+							/>
+						)}
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
