@@ -18,13 +18,13 @@ type Props = {
 };
 
 const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
-	const { isModalNewProjectOpen, setIstModalNewProjectOpen } = useState(false);
+	const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
 
 	return (
 		<div className="pl-8 pr-4 xl:pl-10">
 			<ModalNewProject
 				isOpen={isModalNewProjectOpen}
-				onClose={() => setIstModalNewProjectOpen(false)}
+				onClose={() => setIsModalNewProjectOpen(false)}
 			/>
 			<div className="pb-6 pt-6 lg:pb-4 lg:pt-8">
 				<Header
@@ -32,7 +32,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
 					buttoComponent={
 						<button
 							className="flex items-center justify-center rounded-md bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
-							onClick={() => setIstModalNewProjectOpen(true)}
+							onClick={() => setIsModalNewProjectOpen(true)}
 						>
 							<PlusSquare className="mr-2 h-5 w-5" />
 							New Board
