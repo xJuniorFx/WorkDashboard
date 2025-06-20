@@ -1,8 +1,30 @@
-import React, { useState } from 'react';
-import * as yup from 'yup';
+import React from 'react';
 import { useCreateProjectMutation } from '@/state/api/projectService';
 import { formatISO } from 'date-fns';
 import Modal from '@/components/Modal';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+const projectSchema = z
+	.object({
+		name: z.string().min(3, 'Project name is Required'),
+		description: z.string().min(1, 'Description is Required'),
+		startDate: z.coerce.date({
+			required_error: 'Start date is required',
+			invalid_type_error: 'Invalid start date',
+		}),
+		endDate: z.coerce.date({
+			required_error: 'End date is required',
+			invalid_type_error: 'Invalid end date',
+		}),
+	})
+	.refine((data) => data.endDate >= data.startDate, {
+		path: ['endDate'],
+		message: 'End date cannot be before start date',
+	});
+
+type formData = z.infer<typeof projectSchema>;
 
 type Props = {
 	isOpen: boolean;
@@ -11,32 +33,33 @@ type Props = {
 
 const ModalNewProject = ({ isOpen, onClose }: Props) => {
 	const [createProject, { isLoading }] = useCreateProjectMutation();
-	const [projectName, setProjectName] = useState('');
-	const [description, setDescription] = useState('');
-	const [startDate, setStartDate] = useState('');
-	const [endDate, serenddDate] = useState('');
 
-	const handleSubmit = async () => {
-		if (!projectName || !startDate || !endDate) return;
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, isValid },
+		reset,
+	} = useForm<formData>({
+		resolver: zodResolver(projectSchema),
+		mode: 'onChange',
+	});
 
-		const formattedStartDate = formatISO(new Date(startDate), {
-			representation: 'complete',
-		});
-
-		const formattedEndDate = formatISO(new Date(endDate), {
-			representation: 'complete',
-		});
-
+	const onSubmit = async (data: formData) => {
 		await createProject({
-			name: projectName,
-			description,
-			startDate: formattedStartDate,
-			endDate: formattedEndDate,
+			...data,
+			name: data.name,
+			description: data.description,
+			startDate: formatISO(new Date(data.startDate)),
+			endDate: formatISO(new Date(data.endDate)),
 		});
+		reset();
 	};
 
-	const isFormValid = () => {
-		return projectName && description && startDate && endDate;
+	const renderError = (field: keyof formData) => {
+		const error = errors[field];
+		return error ? (
+			<p className="text-red-500 text-sm">{error.message}</p>
+		) : null;
 	};
 
 	const inputStyles =
@@ -44,13 +67,55 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
 
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} name="Create New Project">
-			<form
-				className="mt-4 space-y-6"
-				onSubmit={(e) => {
-					e.preventDefault();
-					handleSubmit();
-				}}
-			></form>
+			<form className="mt-4 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+				<div>
+					<input
+						type="text"
+						placeholder="Project Name"
+						className={inputStyles}
+						{...register('name')}
+					/>
+					{renderError('name')}
+				</div>
+				<div>
+					<textarea
+						placeholder="Description"
+						className={inputStyles}
+						{...register('description')}
+					/>
+					{renderError('description')}
+				</div>
+				<div className="grid grid-col-1 gap-4 sm:grid-cols-2 sm:gap-2">
+					<div>
+						<input
+							type="date"
+							className={inputStyles}
+							{...register('startDate')}
+						/>
+						{renderError('startDate')}
+					</div>
+					<div>
+						<input
+							type="date"
+							className={inputStyles}
+							{...register('endDate')}
+						/>
+						{renderError('endDate')}
+					</div>
+				</div>
+				<button
+					type="submit"
+					className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium
+						text-white shadow-sm focus:outline-none focus:ring-2 
+						bg-[#e42974] hover:bg-[#801741]  focus:ring-[#801741]
+						dark:bg-[#2563EB] dark:hover:bg-[#14357d] dark:focus:ring-[#14357d] ${
+							!isValid || isLoading ? 'cursor-not-allowed opacity-50' : ''
+						} `}
+					disabled={!isValid || isLoading}
+				>
+					{isLoading ? 'Creating ...' : 'Create Project'}
+				</button>
+			</form>
 		</Modal>
 	);
 };
