@@ -101,6 +101,7 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 					Add New Task
 				</button>
 			</div>
+
 			<DataGrid
 				rows={tasks || []}
 				columns={columns}
