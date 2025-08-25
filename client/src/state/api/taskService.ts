@@ -17,14 +17,6 @@ export const taskApi = api.injectEndpoints({
 				body: task,
 			}),
 			invalidatesTags: ['Tasks'],
-			// Force refetch of tasks after creation
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-				try {
-					await queryFulfilled;
-					// Invalidate and refetch tasks for this project
-					dispatch(taskApi.util.invalidateTags(['Tasks']));
-				} catch {}
-			},
 		}),
 		updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
 			query: ({ taskId, status }) => ({
