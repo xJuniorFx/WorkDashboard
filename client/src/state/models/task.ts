@@ -2,7 +2,7 @@ import { User } from './user';
 
 export enum Priority {
 	Urgent = 'Urgent',
-	Hight = 'Hight',
+	High = 'High',
 	Medium = 'Medium',
 	Low = 'Low',
 	Backlog = 'Backlog',

@@ -27,6 +27,17 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
 		updateTaskStatus({ taskId, status: toStatus });
 	};
 
+	// Debug logging
+	console.log('BoardView - Project ID:', id);
+	console.log('BoardView - Tasks:', tasks);
+	console.log('BoardView - Tasks count:', tasks?.length);
+	if (tasks) {
+		console.log(
+			'BoardView - Task statuses:',
+			tasks.map((t) => ({ id: t.id, title: t.title, status: t.status }))
+		);
+	}
+
 	if (isLoading) return <div> Loading ...</div>;
 	if (error) return <div>An error ocurred while fetching the tasks</div>;
 

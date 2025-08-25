@@ -10,7 +10,7 @@ import { useCreateTaskMutation } from '@/state/api/taskService';
 type Props = {
 	isOpen: boolean;
 	onClose: () => void;
-	id: number;
+	id?: string;
 };
 
 const taskSchema = z
@@ -32,16 +32,15 @@ const taskSchema = z
 			required_error: 'Due date is required',
 			invalid_type_error: 'Invalid due date',
 		}),
-		authorUserId: z.coerce.number().min(1, 'Author is required'),
-		assignedUserId: z.coerce.number().optional(),
-		projectId: z.coerce.number(),
+		authorUserId: z.string().min(1, 'Author User ID is required'),
+		assignedUserId: z.string().optional(),
 	})
 	.refine((data) => data.dueDate >= data.startDate, {
 		path: ['dueDate'],
 		message: 'Due date cannot be before start date',
 	});
 
-type taskFormData = z.infer<typeof taskSchema>;
+type FormData = z.infer<typeof taskSchema>;
 
 const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 	const [createTask, { isLoading }] = useCreateTaskMutation();
@@ -51,29 +50,36 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 		handleSubmit,
 		formState: { errors, isValid },
 		reset,
-	} = useForm<taskFormData>({
+	} = useForm<FormData>({
 		resolver: zodResolver(taskSchema),
 		mode: 'onChange',
+		defaultValues: {
+			status: Status.ToDo,
+			priority: Priority.Backlog,
+		},
 	});
 
-	const onSubmit = async (data: taskFormData) => {
-		await createTask({
-			...data,
-			title: data.title,
-			description: data.description,
-			status: data.status,
-			priority: data.priority,
-			tags: data.tags,
-			startDate: formatISO(new Date(data.startDate)),
-			dueDate: formatISO(new Date(data.dueDate)),
-			authorUserId: data.authorUserId,
-			assignedUserId: data.assignedUserId,
-			projectId: Number(id),
-		});
+	const handleClose = () => {
 		reset();
+		onClose();
 	};
 
-	const renderError = (field: keyof taskFormData) => {
+	const onSubmit = async (data: FormData) => {
+		await createTask({
+			...data,
+			startDate: formatISO(new Date(data.startDate)),
+			dueDate: formatISO(new Date(data.dueDate)),
+			projectId: Number(id),
+			authorUserId: parseInt(data.authorUserId),
+			assignedUserId: data.assignedUserId
+				? parseInt(data.assignedUserId)
+				: undefined,
+		});
+		reset();
+		onClose();
+	};
+
+	const renderError = (field: keyof FormData) => {
 		const error = errors[field];
 		return error ? (
 			<p className="text-red-500 text-sm">{error.message}</p>
@@ -87,7 +93,7 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 		'mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none';
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} name="Create New Task">
+		<Modal isOpen={isOpen} onClose={handleClose} name="Create New Task">
 			<form className="mt-4 space-y-6" onSubmit={handleSubmit(onSubmit)}>
 				<div>
 					<input
@@ -105,7 +111,7 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 				/>
 				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
 					<div>
-						<select className={selectStyles} {...register('status')}>
+						<select {...register('status')} className={selectStyles}>
 							{Object.values(Status).map((s) => (
 								<option key={s} value={s}>
 									{s}
@@ -115,7 +121,7 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 						{renderError('status')}
 					</div>
 					<div>
-						<select className={selectStyles} {...register('priority')}>
+						<select {...register('priority')} className={selectStyles}>
 							{Object.values(Priority).map((p) => (
 								<option key={p} value={p}>
 									{p}
@@ -151,19 +157,21 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 				</div>
 				<div>
 					<input
-						type="text"
+						type="number"
 						className={inputStyles}
 						placeholder="Author User ID"
 						{...register('authorUserId')}
 					/>
 					{renderError('authorUserId')}
 				</div>
+
 				<input
-					type="text"
+					type="number"
 					className={inputStyles}
 					placeholder="Assigned User ID"
 					{...register('assignedUserId')}
 				/>
+
 				<button
 					type="submit"
 					className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium
