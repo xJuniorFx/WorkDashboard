@@ -7,9 +7,9 @@ import helmet from 'helmet'; // Middleware to increase app security by setting H
 import morgan from 'morgan'; // Middleware to log HTTP requests
 
 /* ROUTE IMPORTS */
-// Importing project routes
 import projectRoutes from './routes/projectRoutes';
 import taskRoutes from './routes/taskRoutes';
+import searchRoutes from './routes/searchRoutes';
 
 /* CONFIGURATIONS */
 // Middleware configurations
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);
-
+app.use('/search', searchRoutes);
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
