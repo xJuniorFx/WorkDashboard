@@ -11,7 +11,7 @@ type TimeLineProps = {
 
 type TaskTypeItems = 'task' | 'milestone' | 'project';
 
-const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
+const TimelineView = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 	const isDarkMode = useAppSelector((state) => state.global.isDarkModeActive);
 
 	const {
@@ -55,13 +55,13 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 		<div className="px-4 xl:px-6">
 			<div className="flex flex-wrap items-center justify-between gap-2 py-5">
 				<button
-					className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+					className="flex items-center rounded bg-[#1f2937] px-3 py-2 text-white hover:bg-[#9ba1a6] dark:bg-[#7b808a] dark:hover:bg-[#c8cace]"
 					onClick={() => setIsModalNewTaskOpen(true)}
 				>
 					Add New Task
 				</button>
 				<div className="flex w-64">
-					<div className={'w-2 rounded-s-lg bg-[#e42974] dark:bg-[#2563EB] '} />
+					<div className={'w-2 rounded-s-lg bg-[#1f2937] dark:bg-[#aeb8c2] '} />
 					<select
 						className="
                         focus:shadow-outline block w-full appearance-none rounded border-gray-400 bg-white
@@ -85,8 +85,8 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 						{...displayOptions}
 						columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
 						listCellWidth="160px"
-						barBackgroundColor={isDarkMode ? '#2563EB' : '#e42974'}
-						barBackgroundSelectedColor={isDarkMode ? '#2563EB' : '#e42974'}
+						projectBackgroundColor={isDarkMode ? '#000000' : '#000000'}
+						barBackgroundSelectedColor={isDarkMode ? '#aeb8c2' : '#1f2937'}
 					/>
 				</div>
 			</div>
@@ -94,4 +94,4 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 	);
 };
 
-export default Timeline;
+export default TimelineView;

@@ -60,22 +60,22 @@ body,
 	@apply text-center border-[#e6e4e4] dark:border-stroke-dark;
 }
 .timeline .calendarTop ._2q1Kt {
-	@apply text-sm font-bold text-[#1d1f21] dark:text-white;
+	@apply text-sm font-bold text-white;
 }
 
 .timeline .bar text {
-	fill: #1d1f21;
+	fill: #000;
 }
 
 .dark .timeline .bar text {
 	fill: white;
 }
 .timeline .today rect {
-	fill: rgba(234, 119, 168, 0.4);
+	fill: rgba(31, 41, 55, 0.4);
 }
 
 .dark .timeline .today rect {
-	fill: rgba(37, 99, 235, 0.3);
+	fill: rgba(174, 184, 194, 0.3);
 }
 ::-webkit-scrollbar {
 	width: 0px;

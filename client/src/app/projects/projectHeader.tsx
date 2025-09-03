@@ -31,7 +31,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
 					name={'Product Design Development'}
 					buttoComponent={
 						<button
-							className="flex items-center justify-center rounded-md bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+							className="flex items-center justify-center rounded-md bg-[#1f2937] px-3 py-2 text-white hover:bg-[#9ba1a6] dark:bg-[#7b808a] dark:hover:bg-[#c8cace]"
 							onClick={() => setIsModalNewProjectOpen(true)}
 						>
 							<PlusSquare className="mr-2 h-5 w-5" />
