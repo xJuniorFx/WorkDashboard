@@ -11,6 +11,7 @@ import projectRoutes from './routes/projectRoutes';
 import taskRoutes from './routes/taskRoutes';
 import searchRoutes from './routes/searchRoutes';
 import userRoutes from './routes/userRoutes';
+import teamRoutes from './routes/teamRoutes';
 
 /* CONFIGURATIONS */
 // Middleware configurations
@@ -32,6 +33,7 @@ app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/search', searchRoutes);
 app.use('/users', userRoutes);
+app.use('/teams', teamRoutes);
 
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000

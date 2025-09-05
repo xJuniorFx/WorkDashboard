@@ -15,6 +15,7 @@ const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
 const taskRoutes_1 = __importDefault(require("./routes/taskRoutes"));
 const searchRoutes_1 = __importDefault(require("./routes/searchRoutes"));
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+const teamRoutes_1 = __importDefault(require("./routes/teamRoutes"));
 /* CONFIGURATIONS */
 // Middleware configurations
 dotenv_1.default.config();
@@ -34,6 +35,7 @@ app.use('/projects', projectRoutes_1.default);
 app.use('/tasks', taskRoutes_1.default);
 app.use('/search', searchRoutes_1.default);
 app.use('/users', userRoutes_1.default);
+app.use('/teams', teamRoutes_1.default);
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
