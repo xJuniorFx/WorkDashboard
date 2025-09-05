@@ -22,6 +22,10 @@ body,
 }
 
 /* TIMELINE STYLING */
+.timeline {
+	width: 100%;
+	overflow-x: auto;
+}
 .timeline ._3eULf {
 	@apply text-center;
 }

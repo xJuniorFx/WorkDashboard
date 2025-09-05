@@ -67,18 +67,22 @@ const Timeline = () => {
 					</select>
 				</div>
 			</header>
-			<div className="overflow-hidden rounded-md dark:bg-dark-secundary dark:text-white">
+			<div className="overflow-x-auto rounded-md dark:bg-dark-secundary dark:text-white">
 				<div className="timeline">
-					<Gantt
-						key={isDarkMode ? 'dark' : 'light'}
-						tasks={ganttTasks}
-						{...displayOptions}
-						columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
-						listCellWidth="160px"
-						projectBackgroundColor={isDarkMode ? '#101214' : '#9a9ea6'}
-						projectProgressColor={isDarkMode ? '#1f2937' : '#c8cfd6'}
-						projectProgressSelectedColor={isDarkMode ? '#000' : '#9ba1a6'}
-					/>
+					<div className="min-w-[1000px] sm:min-w-[800px]">
+						<Gantt
+							key={isDarkMode ? 'dark' : 'light'}
+							tasks={ganttTasks}
+							{...displayOptions}
+							columnWidth={
+								displayOptions.viewMode === ViewMode.Month ? 150 : 100
+							}
+							listCellWidth="160px"
+							projectBackgroundColor={isDarkMode ? '#101214' : '#9a9ea6'}
+							projectProgressColor={isDarkMode ? '#1f2937' : '#c8cfd6'}
+							projectProgressSelectedColor={isDarkMode ? '#000' : '#9ba1a6'}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>

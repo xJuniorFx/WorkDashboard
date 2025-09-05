@@ -77,17 +77,21 @@ const TimelineView = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
 					</select>
 				</div>
 			</div>
-			<div className="overflow-hidden rounded-md dark:bg-dark-secundary dark:text-white">
+			<div className="overflow-x-auto rounded-md dark:bg-dark-secundary dark:text-white">
 				<div className="timeline">
-					<Gantt
-						key={isDarkMode ? 'dark' : 'light'}
-						tasks={ganttTasks}
-						{...displayOptions}
-						columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
-						listCellWidth="160px"
-						projectBackgroundColor={isDarkMode ? '#000000' : '#000000'}
-						barBackgroundSelectedColor={isDarkMode ? '#aeb8c2' : '#1f2937'}
-					/>
+					<div className="min-w-[1000px] sm:min-w-[800px]">
+						<Gantt
+							key={isDarkMode ? 'dark' : 'light'}
+							tasks={ganttTasks}
+							{...displayOptions}
+							columnWidth={
+								displayOptions.viewMode === ViewMode.Month ? 150 : 100
+							}
+							listCellWidth="160px"
+							projectBackgroundColor={isDarkMode ? '#000000' : '#000000'}
+							barBackgroundSelectedColor={isDarkMode ? '#aeb8c2' : '#1f2937'}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
