@@ -65,8 +65,8 @@ const Sidebar = () => {
 					<SidebarLink icon={House} label="House" href="/" />
 					<SidebarLink icon={CalendarRange} label="Timeline" href="/Timeline" />
 					<SidebarLink icon={Search} label="Search" href="/Search" />
-					<SidebarLink icon={Settings} label="Setting" href="/Setting" />
-					<SidebarLink icon={User} label="User" href="/User" />
+					<SidebarLink icon={Settings} label="Settings" href="/Settings" />
+					<SidebarLink icon={User} label="Users" href="/Users" />
 					<SidebarLink icon={Users} label="Team" href="/Team" />
 
 					<SidebarProjectsSection />

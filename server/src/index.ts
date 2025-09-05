@@ -10,6 +10,7 @@ import morgan from 'morgan'; // Middleware to log HTTP requests
 import projectRoutes from './routes/projectRoutes';
 import taskRoutes from './routes/taskRoutes';
 import searchRoutes from './routes/searchRoutes';
+import userRoutes from './routes/userRoutes';
 
 /* CONFIGURATIONS */
 // Middleware configurations
@@ -30,6 +31,8 @@ app.get('/', (req, res) => {
 app.use('/projects', projectRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/search', searchRoutes);
+app.use('/users', userRoutes);
+
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
