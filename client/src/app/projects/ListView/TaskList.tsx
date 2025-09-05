@@ -12,7 +12,7 @@ const TaskCard = ({ task }: Props) => {
 	const taskTagsSplit = task.tags ? task.tags.split(',') : [];
 
 	return (
-		<div className="rounded-2xl bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-dark-secundary dark:text-white">
+		<div className="rounded-2xl bg-white p-4 shadow-md transition hover:shadow-lg dark:bg-dark-secundary dark:text-white dark:hover:shadow-white/20">
 			<h3 className="mb-2 text-xl font-semibold">{task.title}</h3>
 
 			<div className="mb-2">

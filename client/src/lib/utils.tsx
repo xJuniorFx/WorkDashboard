@@ -3,68 +3,69 @@ export const dataGridClassNames =
 
 export const dataGridSxStyles = (isDarkMode: boolean) => {
 	return {
+		// Overall background and text color
 		backgroundColor: isDarkMode ? '#1d1f21' : 'white',
 		color: isDarkMode ? '#e5e7eb' : 'black',
 
+		// Column headers styling
 		'& .MuiDataGrid-columnHeaders': {
-			color: isDarkMode ? '#e5e7eb' : '',
+			backgroundColor: isDarkMode ? '#1d1f21' : 'white',
+			color: isDarkMode ? '#e5e7eb' : 'black',
+			borderBottom: `1px solid ${isDarkMode ? '#2d3135' : '#9ba1a6'}`,
 			'& [role="row"] > *': {
 				backgroundColor: isDarkMode ? '#1d1f21' : 'white',
-				borderColor: isDarkMode ? '#2d3135' : '',
+				borderColor: isDarkMode ? '#2d3135' : '#e0e0e0',
 			},
 		},
 
-		'& .MuiIconButton-root': {
-			color: isDarkMode ? '#a3a3a3' : '',
-		},
-		'& .MuiTablePagination-root': {
-			color: isDarkMode ? '#a3a3a3' : '',
-		},
-		'& .MuiTablePagination-selectIcon': {
-			color: isDarkMode ? '#a3a3a3' : '',
-		},
-
-		'& .MuiDataGrid-cell': {
-			border: 'none',
-		},
-
+		// Row styling
 		'& .MuiDataGrid-row': {
-			borderBottom: `1px solid ${isDarkMode ? '#2d3135' : '#e5e7eb'}`,
+			backgroundColor: isDarkMode ? '#1d1f21' : 'white',
+			borderBottom: `1px solid ${isDarkMode ? '#2d3135' : '#e0e0e0'}`,
 			transition: 'background-color 0.2s ease-in-out',
 		},
-
 		'& .MuiDataGrid-row:hover': {
 			backgroundColor: isDarkMode
-				? 'rgba(37, 99, 235, 0.15)'
-				: 'rgba(234, 119, 168, 0.2)',
+				? 'rgba(75, 85, 99, 0.5)'
+				: 'rgb(229 231 235)',
 		},
-
 		'& .MuiDataGrid-row.Mui-selected': {
 			backgroundColor: isDarkMode
-				? 'rgba(37, 99, 235, 0.3)' // isDarkMode = blue
-				: 'rgba(234, 119, 168, 0.4)', // !isDarkMode = pink
-			border: `1px solid ${isDarkMode ? '#2563EB' : '#e42974'}`, //
+				? 'rgba(75, 85, 99, 0.5)'
+				: 'rgb(229 231 235)',
+			border: `1px solid ${isDarkMode ? '#c8cace' : '#1f2937'}`,
 		},
 		'& .MuiDataGrid-row.Mui-selected:hover': {
 			backgroundColor: isDarkMode
-				? 'rgba(37, 99, 235, 0.3)'
-				: 'rgba(234, 119, 168, 0.4)',
+				? 'rgba(75, 85, 99, 0.7)'
+				: 'rgb(229 231 235)',
 		},
-		'& .MuiDataGrid-row.Mui-selected.Mui-focusVisible': {
-			outline: `2px solid ${isDarkMode ? '#2563EB' : '#e42974'}`,
-			outlineOffset: '-1px',
+
+		// Cell styling
+		'& .MuiDataGrid-cell': {
+			border: 'none',
 		},
-		'& .MuiDataGrid-cell:focus': {
-			outline: `2px solid ${isDarkMode ? '#2563EB' : '#e42974'}`,
-			outlineOffset: '-1px',
-		},
-		'& .MuiDataGrid-cell:focus-within': {
-			outline: `2px solid ${isDarkMode ? '#2563EB' : '#e42974'}`,
+		'& .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within': {
+			outline: `2px solid ${isDarkMode ? '#c8cace' : '#1f2937'}`,
 			outlineOffset: '-1px',
 		},
 
+		// Checkboxes and icons
+		'& .MuiCheckbox-root': {
+			color: isDarkMode ? '#ffffff' : '',
+		},
+		'& .MuiIconButton-root': {
+			color: isDarkMode ? '#a3a3a3' : '',
+		},
+
+		// Pagination
+		'& .MuiTablePagination-root, & .MuiTablePagination-selectIcon': {
+			color: isDarkMode ? '#a3a3a3' : '',
+		},
+
+		// General border color
 		'& .MuiDataGrid-withBorderColor': {
-			borderColor: isDarkMode ? '#2d3135' : '#e5e7eb',
+			borderColor: isDarkMode ? '#c8cace' : '#9ba1a6',
 		},
 	};
 };

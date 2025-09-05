@@ -1,7 +1,14 @@
 import { useAppSelector } from '@/app/redux';
 import { useGetTasksQuery } from '@/state/api/taskService';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
-import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
+import {
+	DataGrid,
+	GridColDef,
+	GridRowSelectionModel,
+	GridToolbarContainer,
+	GridToolbarExport,
+	GridToolbarFilterButton,
+} from '@mui/x-data-grid';
 import React, { useState } from 'react';
 
 type Props = {
@@ -77,9 +84,35 @@ const columns: GridColDef[] = [
 	},
 ];
 
+const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
+	<GridToolbarContainer className="toolbar flex gap-2">
+		<GridToolbarFilterButton
+			slotProps={{
+				button: {
+					sx: {
+						color: isDarkMode ? 'white' : 'black',
+					},
+				},
+			}}
+		/>
+		<GridToolbarExport
+			slotProps={{
+				button: {
+					sx: {
+						color: isDarkMode ? 'white' : 'black',
+					},
+				},
+			}}
+		/>
+	</GridToolbarContainer>
+);
+
 const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 	const [rowSelectionModel, setRowSelectionModel] =
 		useState<GridRowSelectionModel>([]);
+	const isDarkModeActive = useAppSelector(
+		(state) => state.global.isDarkModeActive
+	);
 	const isDarkMode = useAppSelector((state) => state.global.isDarkModeActive);
 
 	const {
@@ -95,7 +128,7 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 		<div className="h-[540px] w-full px-4 pb-8 xl:px-6">
 			<div className="gap-2 py-5">
 				<button
-					className="flex items-center rounded bg-[#e42974] px-3 py-2 text-white hover:bg-[#801741] dark:bg-[#2563EB] dark:hover:bg-[#14357d]"
+					className="flex justify-end items-center rounded bg-[#1f2937] px-3 py-2 text-white hover:bg-[#9ba1a6] dark:bg-[#7b808a] dark:hover:bg-[#c8cace]"
 					onClick={() => setIsModalNewTaskOpen(true)}
 				>
 					Add New Task
@@ -119,6 +152,11 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 						setRowSelectionModel(newSelection);
 					}
 				}}
+				slots={{
+					toolbar: () => <CustomToolbar isDarkMode={isDarkModeActive} />,
+				}}
+				checkboxSelection
+				disableRowSelectionOnClick={false}
 			/>
 		</div>
 	);

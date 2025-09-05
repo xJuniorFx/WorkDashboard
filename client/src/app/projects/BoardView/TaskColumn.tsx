@@ -40,7 +40,7 @@ const TaskColumn = ({
 				drop(instance);
 			}}
 			className={`sl:py-4 rounded-lg py-2 xl:px-2 ${
-				isOver ? 'bg-blue-100 dark:bg-neutral-950' : ''
+				isOver ? 'bg-gray-200 dark:bg-neutral-950' : ''
 			}`}
 		>
 			<div className="mb-3 flex w-full">
