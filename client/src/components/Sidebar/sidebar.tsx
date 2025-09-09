@@ -63,11 +63,11 @@ const Sidebar = () => {
 				{/* NAV BAR LINKS */}
 				<nav className="z-10 w-full">
 					<SidebarLink icon={House} label="House" href="/" />
-					<SidebarLink icon={CalendarRange} label="Timeline" href="/Timeline" />
-					<SidebarLink icon={Search} label="Search" href="/Search" />
-					<SidebarLink icon={Settings} label="Settings" href="/Settings" />
-					<SidebarLink icon={User} label="Users" href="/Users" />
-					<SidebarLink icon={Users} label="Teams" href="/Teams" />
+					<SidebarLink icon={CalendarRange} label="Timeline" href="/timeline" />
+					<SidebarLink icon={Search} label="Search" href="/search" />
+					<SidebarLink icon={Settings} label="Settings" href="/settings" />
+					<SidebarLink icon={User} label="Users" href="/users" />
+					<SidebarLink icon={Users} label="Teams" href="/teams" />
 
 					<SidebarProjectsSection />
 					<SidebarPrioritiesSection />
