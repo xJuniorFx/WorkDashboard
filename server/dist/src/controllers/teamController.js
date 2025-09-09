@@ -20,11 +20,11 @@ const getTeams = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 where: { userId: team.productOwnerUserId },
                 select: { username: true },
             });
-            const productManager = yield prisma.user.findUnique({
-                where: { userId: team.productManagerUserId },
+            const projectManager = yield prisma.user.findUnique({
+                where: { userId: team.projectManagerUserId },
                 select: { username: true },
             });
-            return Object.assign(Object.assign({}, team), { productOwnerUsername: productOwner === null || productOwner === void 0 ? void 0 : productOwner.username, productManagerUsername: productManager === null || productManager === void 0 ? void 0 : productManager.username });
+            return Object.assign(Object.assign({}, team), { productOwnerUsername: productOwner === null || productOwner === void 0 ? void 0 : productOwner.username, productManagerUsername: projectManager === null || projectManager === void 0 ? void 0 : projectManager.username });
         })));
         res.json(teamsWithUsernames);
     }

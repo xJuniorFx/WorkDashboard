@@ -15,10 +15,14 @@ import Header from '@/components/Header';
 import { useGetTeamsQuery } from '@/state/api/teamService';
 
 const columns: GridColDef[] = [
-	{ field: 'teamId', headerName: 'Team ID', width: 100 },
+	{ field: 'id', headerName: 'Team ID', width: 100 },
 	{ field: 'teamName', headerName: 'Team Name', width: 200 },
-	{ field: 'productOwnerUserId', headerName: 'Product Owner', width: 200 },
-	{ field: 'projectManagerUserId', headerName: 'Product Manager', width: 200 },
+	{ field: 'productOwnerUsername', headerName: 'Product Owner', width: 200 },
+	{
+		field: 'productManagerUsername',
+		headerName: 'Project Manager',
+		width: 200,
+	},
 ];
 
 const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
