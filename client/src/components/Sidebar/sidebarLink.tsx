@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/app/redux';
 
 interface SidebarLinkProps {
 	href: string;
@@ -14,12 +13,6 @@ const SidebarLink = ({ href, icon: Icon, label }: SidebarLinkProps) => {
 	const pathName = usePathname();
 	const isActive =
 		pathName === href || (pathName === '/' && href === '/dashboard');
-	const screenWidth = window.innerWidth;
-
-	const dispatch = useAppDispatch();
-	const isSideBarCollapsed = useAppSelector(
-		(state) => state.global.isSideBarCollapsed
-	);
 
 	return (
 		<Link href={href} className="w-full">
