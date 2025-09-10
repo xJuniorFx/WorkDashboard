@@ -17,9 +17,9 @@ import Header from '@/components/Header';
 
 const columns: GridColDef[] = [
 	{ field: 'userId', headerName: 'ID', width: 100 },
+	{ field: 'username', headerName: 'Username', width: 150 },
 	{ field: 'teamId', headerName: 'Team ID', width: 100 },
 	{ field: 'teamName', headerName: 'Team', width: 200 },
-	{ field: 'username', headerName: 'Username', width: 150 },
 	{
 		field: 'profilePictureUrl',
 		headerName: 'Profile Picture',
