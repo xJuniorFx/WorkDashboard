@@ -3,17 +3,11 @@
 import { useGetUsersQuery } from '@/state/api/usersService';
 import React, { useState } from 'react';
 import { useAppSelector } from '../redux';
-import {
-	GridToolbarContainer,
-	GridToolbarFilterButton,
-	GridToolbarExport,
-	GridColDef,
-	DataGrid,
-	GridRowSelectionModel,
-} from '@mui/x-data-grid';
+import { GridColDef, DataGrid, GridRowSelectionModel } from '@mui/x-data-grid';
 import Image from 'next/image';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
 import Header from '@/components/Header';
+import CustomToolbar from '@/components/CustomTollbar';
 
 const columns: GridColDef[] = [
 	{ field: 'userId', headerName: 'ID', width: 100 },
@@ -43,21 +37,6 @@ const columns: GridColDef[] = [
 		),
 	},
 ];
-
-const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
-	<GridToolbarContainer className="toolbar flex gap-2">
-		<GridToolbarFilterButton
-			slotProps={{
-				button: { sx: { color: isDarkMode ? 'white' : 'black' } },
-			}}
-		/>
-		<GridToolbarExport
-			slotProps={{
-				button: { sx: { color: isDarkMode ? 'white' : 'black' } },
-			}}
-		/>
-	</GridToolbarContainer>
-);
 
 const Users = () => {
 	const { data: users, isLoading, isError } = useGetUsersQuery();
