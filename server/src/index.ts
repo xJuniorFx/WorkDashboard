@@ -38,6 +38,6 @@ app.use('/teams', teamRoutes);
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
 	console.log(`Server running on port ${port}`); // Logging confirmation that the server is running
 });
