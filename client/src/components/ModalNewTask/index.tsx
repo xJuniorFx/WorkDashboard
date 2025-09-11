@@ -1,5 +1,5 @@
 import { Priority, Status } from '@/state/models/task';
-import React from 'react';
+import React, { useState } from 'react';
 import { formatISO } from 'date-fns';
 import Modal from '@/components/Modal';
 import { useForm } from 'react-hook-form';
@@ -10,7 +10,7 @@ import { useCreateTaskMutation } from '@/state/api/taskService';
 type Props = {
 	isOpen: boolean;
 	onClose: () => void;
-	id?: string;
+	id?: string | null;
 };
 
 const taskSchema = z
@@ -34,6 +34,11 @@ const taskSchema = z
 		}),
 		authorUserId: z.string().min(1, 'Author User ID is required'),
 		assignedUserId: z.string().optional(),
+		projectId: z
+			.string()
+			.min(1, 'Project ID is required')
+			.regex(/^\d+$/, 'Project ID must be a number')
+			.optional(),
 	})
 	.refine((data) => data.dueDate >= data.startDate, {
 		path: ['dueDate'],
@@ -42,7 +47,7 @@ const taskSchema = z
 
 type FormData = z.infer<typeof taskSchema>;
 
-const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
+const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	const [createTask, { isLoading }] = useCreateTaskMutation();
 
 	const {
@@ -65,11 +70,12 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 	};
 
 	const onSubmit = async (data: FormData) => {
+		const finalProjectId = id !== null ? Number(id) : Number(data.projectId);
 		await createTask({
 			...data,
 			startDate: formatISO(new Date(data.startDate)),
 			dueDate: formatISO(new Date(data.dueDate)),
-			projectId: Number(id),
+			projectId: finalProjectId,
 			authorUserId: parseInt(data.authorUserId),
 			assignedUserId: data.assignedUserId
 				? parseInt(data.assignedUserId)
@@ -172,12 +178,23 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
 					{...register('assignedUserId')}
 				/>
 
+				{!id && (
+					<div>
+						<input
+							type="text"
+							className={inputStyles}
+							placeholder="ProjectId"
+							{...register('projectId')}
+						/>
+						{renderError('projectId')}
+					</div>
+				)}
 				<button
 					type="submit"
 					className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium
 						text-white shadow-sm focus:outline-none focus:ring-2 
-						bg-[#e42974] hover:bg-[#801741]  focus:ring-[#801741]
-						dark:bg-[#2563EB] dark:hover:bg-[#14357d] dark:focus:ring-[#14357d] ${
+						bg-[#1f2937] hover:bg-[#9ba1a6]  focus:ring-[#9ba1a6]
+						dark:bg-[#b1b3b7] dark:hover:bg-[#d0d2d5] dark:focus:ring-[#d0d2d5] ${
 							!isValid || isLoading ? 'cursor-not-allowed opacity-50' : ''
 						} `}
 					disabled={!isValid || isLoading}
