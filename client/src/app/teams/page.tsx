@@ -2,17 +2,11 @@
 
 import React, { useState } from 'react';
 import { useAppSelector } from '../redux';
-import {
-	GridToolbarContainer,
-	GridToolbarFilterButton,
-	GridToolbarExport,
-	GridColDef,
-	DataGrid,
-	GridRowSelectionModel,
-} from '@mui/x-data-grid';
+import { GridColDef, DataGrid, GridRowSelectionModel } from '@mui/x-data-grid';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
 import Header from '@/components/Header';
 import { useGetTeamsQuery } from '@/state/api/teamService';
+import CustomToolbar from '@/components/CustomTollbar';
 
 const columns: GridColDef[] = [
 	{ field: 'id', headerName: 'Team ID', width: 100 },
@@ -24,29 +18,6 @@ const columns: GridColDef[] = [
 		width: 200,
 	},
 ];
-
-const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
-	<GridToolbarContainer className="toolbar flex gap-2">
-		<GridToolbarFilterButton
-			slotProps={{
-				button: {
-					sx: {
-						color: isDarkMode ? 'white' : 'black',
-					},
-				},
-			}}
-		/>
-		<GridToolbarExport
-			slotProps={{
-				button: {
-					sx: {
-						color: isDarkMode ? 'white' : 'black',
-					},
-				},
-			}}
-		/>
-	</GridToolbarContainer>
-);
 
 const Teams = () => {
 	const { data: teams, isLoading, isError } = useGetTeamsQuery();

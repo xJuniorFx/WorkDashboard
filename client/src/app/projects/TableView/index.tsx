@@ -1,15 +1,9 @@
 import { useAppSelector } from '@/app/redux';
 import { useGetTasksQuery } from '@/state/api/taskService';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
-import {
-	DataGrid,
-	GridColDef,
-	GridRowSelectionModel,
-	GridToolbarContainer,
-	GridToolbarExport,
-	GridToolbarFilterButton,
-} from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import React, { useState } from 'react';
+import CustomToolbar from '@/components/CustomTollbar';
 
 type Props = {
 	id: string;
@@ -83,29 +77,6 @@ const columns: GridColDef[] = [
 		renderCell: (params) => params.value?.assignee || 'Unassigned',
 	},
 ];
-
-const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
-	<GridToolbarContainer className="toolbar flex gap-2">
-		<GridToolbarFilterButton
-			slotProps={{
-				button: {
-					sx: {
-						color: isDarkMode ? 'white' : 'black',
-					},
-				},
-			}}
-		/>
-		<GridToolbarExport
-			slotProps={{
-				button: {
-					sx: {
-						color: isDarkMode ? 'white' : 'black',
-					},
-				},
-			}}
-		/>
-	</GridToolbarContainer>
-);
 
 const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
 	const [rowSelectionModel, setRowSelectionModel] =

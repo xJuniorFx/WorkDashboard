@@ -4,14 +4,7 @@ import { useGetTasksQuery } from '@/state/api/taskService';
 import React, { useState } from 'react';
 import { useAppSelector } from '../redux';
 import { useGetProjectsQuery } from '@/state/api/projectService';
-import {
-	DataGrid,
-	GridColDef,
-	GridRowSelectionModel,
-	GridToolbarContainer,
-	GridToolbarExport,
-	GridToolbarFilterButton,
-} from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import Header from '@/components/Header';
 import {
 	Bar,
@@ -27,6 +20,7 @@ import {
 	YAxis,
 } from 'recharts';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
+import CustomToolbar from '@/components/CustomTollbar';
 
 const taskColumns: GridColDef[] = [
 	{ field: 'title', headerName: 'Title', width: 150 },
@@ -36,21 +30,6 @@ const taskColumns: GridColDef[] = [
 ];
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
-const CustomToolbar = ({ isDarkMode }: { isDarkMode: boolean }) => (
-	<GridToolbarContainer className="toolbar flex gap-2">
-		<GridToolbarFilterButton
-			slotProps={{
-				button: { sx: { color: isDarkMode ? 'white' : 'black' } },
-			}}
-		/>
-		<GridToolbarExport
-			slotProps={{
-				button: { sx: { color: isDarkMode ? 'white' : 'black' } },
-			}}
-		/>
-	</GridToolbarContainer>
-);
 
 const HomePage = () => {
 	const [rowSelectionModel, setRowSelectionModel] =
