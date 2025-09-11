@@ -5,10 +5,10 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // 🚀 não falha o build por erros de ESLint
+    ignoreDuringBuilds: true, 
   },
   typescript: {
-    ignoreBuildErrors: true, // 🚀 não falha o build por erros de TypeScript
+    ignoreBuildErrors: true, 
   },
 };
 
