@@ -107,8 +107,8 @@ const ModalNewProject = ({ isOpen, onClose }: Props) => {
 					type="submit"
 					className={`focus-offset-2 mt-4 flex w-full justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium
 						text-white shadow-sm focus:outline-none focus:ring-2 
-						bg-[#e42974] hover:bg-[#801741]  focus:ring-[#801741]
-						dark:bg-[#2563EB] dark:hover:bg-[#14357d] dark:focus:ring-[#14357d] ${
+						bg-[#1f2937] hover:bg-[#9ba1a6]  focus:ring-[#9ba1a6]
+						dark:bg-[#b1b3b7] dark:hover:bg-[#d0d2d5] dark:focus:ring-[#d0d2d5]${
 							!isValid || isLoading ? 'cursor-not-allowed opacity-50' : ''
 						} `}
 					disabled={!isValid || isLoading}
