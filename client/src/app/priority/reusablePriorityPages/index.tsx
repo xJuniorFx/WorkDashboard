@@ -113,16 +113,20 @@ const ReusablePriorityPage = ({ priority }: Props) => {
 			/>
 			<div className="mb-4 flex justify-start">
 				<button
-					className={`px-4 py-2 ${
-						view === 'List' ? 'bg-gray-300' : 'bg-white'
+					className={`px-4 py-2 dark:text-white hover:bg-[#9ba1a6] dark:hover:bg-[#c8cace] ${
+						view === 'List'
+							? 'bg-[#1f2937] dark:bg-[#9ba1a6] text-white'
+							: 'bg-white dark:bg-dark-secundary'
 					} rounded-l`}
 					onClick={() => setView('List')}
 				>
 					List
 				</button>
 				<button
-					className={`px-4 py-2 ${
-						view === 'Table' ? 'bg-gray-300' : 'bg-white'
+					className={`px-4 py-2 dark:text-white  hover:bg-[#9ba1a6] dark:hover:bg-[#c8cace] ${
+						view === 'Table'
+							? 'bg-[#1f2937] dark:bg-[#9ba1a6] text-white '
+							: 'bg-white dark:bg-dark-secundary'
 					} rounded-l`}
 					onClick={() => setView('Table')}
 				>
