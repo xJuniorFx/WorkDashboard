@@ -10,12 +10,6 @@ const nextConfig: NextConfig = {
 	experimental: {
 		optimizeCss: true,
 	},
-	output: 'export',
-	reactStrictMode: true,
-	trailingSlash: false,
-	images: {
-		unoptimized: true,
-	},
 };
 
 export default nextConfig;
