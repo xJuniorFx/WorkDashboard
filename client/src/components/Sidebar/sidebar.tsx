@@ -49,7 +49,13 @@ const Sidebar = () => {
 				</div>
 				{/* TEAM */}
 				<div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-[1.5rem] py-4 dark:border-gray-700">
-					<Image src="/logo-3.jpg" alt="Logo" width={45} height={45} priority />
+					<Image
+						src={`https://pm-s3-imgs.s3.sa-east-1.amazonaws.com/logo-3.jpg`}
+						alt="Logo"
+						width={45}
+						height={45}
+						priority
+					/>
 					<div className="flex-row items-center">
 						<h3 className="text-md font-bold dark:text-gray-200 tracking-wide">
 							Menu

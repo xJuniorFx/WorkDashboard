@@ -23,7 +23,7 @@ const columns: GridColDef[] = [
 				<div className="h-9 w-9">
 					{params.value ? (
 						<Image
-							src={`/${params.value}`}
+							src={`https://pm-s3-imgs.s3.sa-east-1.amazonaws.com/${params.value}`}
 							alt={params.row.username}
 							width={100}
 							height={50}
