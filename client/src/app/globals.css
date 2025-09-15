@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.app {
+	height: 100%;
+	width: 100%;
+	font-size: small;
+	background-color: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	@apply bg-white;
+	@apply dark:bg-black;
+}
+
+/* TIMELINE STYLING */
+.timeline {
+	width: 100%;
+	overflow-x: auto;
+}
+.timeline ._3eULf {
+	@apply text-center;
+}
+.timeline ._nI1Xw {
+	display: block;
+}
+.timeline ._3_ygE {
+	@apply rounded-tl-md border border-r-0 dark:border-stroke-dark;
+}
+.timeline ._2eZzQ {
+	@apply dark:border-stroke-dark;
+}
+.timeline ._2dZTy {
+	@apply dark:fill-[#1d1f21];
+}
+.timeline ._3lLk3 {
+	@apply border dark:border-stroke-dark dark:fill-[#1d1f21];
+}
+.timeline ._35nLX,
+.timeline ._3T42e {
+	@apply border dark:fill-[#1d1f21] dark:stroke-stroke-dark;
+}
+.timeline ._9w8d5 {
+	@apply fill-[#1d1f21] dark:fill-white;
+}
+.timeline ._34SS0 {
+	@apply bg-white dark:bg-[#1d1f21];
+}
+
+.timeline ._RuwuK,
+.timeline ._3rUKi,
+.timeline ._1rLuZ {
+	@apply text-white dark:stroke-stroke-dark;
+}
+.timeline ._3ZbQT {
+	@apply text-center border-[#e6e4e4] dark:border-stroke-dark;
+}
+.timeline .calendarTop ._2q1Kt {
+	@apply text-sm font-bold text-white;
+}
+
+.timeline .bar text {
+	fill: #000;
+}
+
+.dark .timeline .bar text {
+	fill: white;
+}
+.timeline .today rect {
+	fill: rgba(31, 41, 55, 0.4);
+}
+
+.dark .timeline .today rect {
+	fill: rgba(174, 184, 194, 0.3);
+}
+::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+}
