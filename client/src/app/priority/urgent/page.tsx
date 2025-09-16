@@ -1,12 +1,8 @@
-'use client';
-
 import React from 'react';
 import ReusablePriorityPage from '../reusablePriorityPages';
 import { Priority } from '@/state/models/task';
 
-type Props = {};
-
-const Urgent = (props: Props) => {
+const Urgent = () => {
 	return <ReusablePriorityPage priority={Priority.Urgent} />;
 };
 

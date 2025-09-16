@@ -75,6 +75,7 @@ const columns: GridColDef[] = [
 const ReusablePriorityPage = ({ priority }: Props) => {
 	const [rowSelectionModel, setRowSelectionModel] =
 		useState<GridRowSelectionModel>([]);
+
 	const [view, setView] = useState('List');
 	const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
