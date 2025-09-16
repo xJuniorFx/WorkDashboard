@@ -8,7 +8,6 @@ import {
 } from '@/state/slices/globalSlice';
 import { useGetAuthUserQuery } from '@/state/api/usersService';
 import { signOut } from 'aws-amplify/auth';
-import { error } from 'console';
 import Image from 'next/image';
 
 const Navbar = () => {
@@ -24,7 +23,7 @@ const Navbar = () => {
 	const handleSignOut = async () => {
 		try {
 			await signOut();
-		} catch {
+		} catch (error) {
 			console.error('Error signing out: ', error);
 		}
 	};
