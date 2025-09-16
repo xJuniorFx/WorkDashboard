@@ -1,5 +1,5 @@
 // Importing necessary dependencies
-import express from 'express'; // Framework for creating HTTP servers
+import express, { Request, Response } from 'express'; // Framework for creating HTTP servers and user creation for our Rds Database
 import dotenv from 'dotenv'; // To load environment variables from a .env file
 import bodyParser from 'body-parser'; // Middleware to parse request bodies
 import cors from 'cors'; // Middleware to allow cross-origin requests (Cross-Origin Resource Sharing)
@@ -34,6 +34,35 @@ app.use('/tasks', taskRoutes);
 app.use('/search', searchRoutes);
 app.use('/users', userRoutes);
 app.use('/teams', teamRoutes);
+
+app.post('/create-user', async (req: Request, res: Response) => {
+	import { PrismaClient } from '@prisma/client';
+
+	const prisma = new PrismaClient();
+
+	export const getUsers = async (
+		req: Request,
+		res: Response
+	): Promise<void> => {
+		try {
+			const users = await prisma.user.findMany({
+				include: {
+					team: {
+						select: {
+							teamName: true,
+						},
+					},
+				},
+			});
+
+			res.json(users);
+		} catch (error: any) {
+			res
+				.status(500)
+				.json({ message: `Error retrieving users: ${error.message}` });
+		}
+	};
+});
 
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
