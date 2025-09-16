@@ -16,6 +16,8 @@ import Image from 'next/image';
 import SidebarLink from './sidebarLink';
 import SidebarProjectsSection from './sidebarProjectsSection';
 import SidebarPrioritiesSection from './sidebarPrioritiesSection';
+import { useGetAuthUserQuery } from '@/state/api/usersService';
+import { signOut } from 'aws-amplify/auth';
 
 const Sidebar = () => {
 	const dispatch = useAppDispatch();
@@ -32,7 +34,7 @@ const Sidebar = () => {
 	const handleSignOut = async () => {
 		try {
 			await signOut();
-		} catch {
+		} catch (error) {
 			console.error('Error signing out: ', error);
 		}
 	};
