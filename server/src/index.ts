@@ -35,35 +35,6 @@ app.use('/search', searchRoutes);
 app.use('/users', userRoutes);
 app.use('/teams', teamRoutes);
 
-app.post('/create-user', async (req: Request, res: Response) => {
-	import { PrismaClient } from '@prisma/client';
-
-	const prisma = new PrismaClient();
-
-	export const getUsers = async (
-		req: Request,
-		res: Response
-	): Promise<void> => {
-		try {
-			const users = await prisma.user.findMany({
-				include: {
-					team: {
-						select: {
-							teamName: true,
-						},
-					},
-				},
-			});
-
-			res.json(users);
-		} catch (error: any) {
-			res
-				.status(500)
-				.json({ message: `Error retrieving users: ${error.message}` });
-		}
-	};
-});
-
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
