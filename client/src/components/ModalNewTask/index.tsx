@@ -170,9 +170,9 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 						disabled={isUsersLoading}
 						defaultValue=""
 					>
-						<option value="">Select a user</option>
+						<option value="">Assigne a user</option>
 						{users?.map((user) => (
-							<option key={user.userId} value={user.userId}>
+							<option key={user.userId} value={user.userId.toString()}>
 								{user.username}
 							</option>
 						))}
@@ -189,7 +189,7 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 					>
 						<option value="">Select author</option>
 						{users?.map((user) => (
-							<option key={user.userId} value={user.userId}>
+							<option key={user.userId} value={user.userId.toString()}>
 								{user.username}
 							</option>
 						))}

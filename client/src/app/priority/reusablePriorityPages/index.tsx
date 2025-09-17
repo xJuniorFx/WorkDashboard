@@ -81,8 +81,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
 
 	const { data: currentUser } = useGetAuthUserQuery({});
 	const userId = currentUser?.userDetails?.userId;
-	console.log(userId);
-	console.log(currentUser);
+
 	const {
 		data: task,
 		isLoading,
