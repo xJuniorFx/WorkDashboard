@@ -1,11 +1,12 @@
 import { Priority, Status } from '@/state/models/task';
-import React, { useState } from 'react';
+import React from 'react';
 import { formatISO } from 'date-fns';
 import Modal from '@/components/Modal';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCreateTaskMutation } from '@/state/api/taskService';
+import { useGetUsersQuery } from '@/state/api/usersService';
 
 type Props = {
 	isOpen: boolean;
@@ -49,6 +50,7 @@ type FormData = z.infer<typeof taskSchema>;
 
 const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	const [createTask, { isLoading }] = useCreateTaskMutation();
+	const { data: users, isLoading: isUsersLoading } = useGetUsersQuery();
 
 	const {
 		register,
@@ -162,21 +164,38 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 					</div>
 				</div>
 				<div>
-					<input
-						type="number"
-						className={inputStyles}
-						placeholder="Author User ID"
-						{...register('authorUserId')}
-					/>
-					{renderError('authorUserId')}
+					<select
+						{...register('assignedUserId')}
+						className={selectStyles}
+						disabled={isUsersLoading}
+						defaultValue=""
+					>
+						<option value="">Select a user</option>
+						{users?.map((user) => (
+							<option key={user.userId} value={user.userId}>
+								{user.username}
+							</option>
+						))}
+					</select>
+					{renderError('assignedUserId')}
 				</div>
 
-				<input
-					type="number"
-					className={inputStyles}
-					placeholder="Assigned User ID"
-					{...register('assignedUserId')}
-				/>
+				<div>
+					<select
+						{...register('authorUserId')}
+						className={selectStyles}
+						disabled={isUsersLoading}
+						defaultValue=""
+					>
+						<option value="">Select author</option>
+						{users?.map((user) => (
+							<option key={user.userId} value={user.userId}>
+								{user.username}
+							</option>
+						))}
+					</select>
+					{renderError('authorUserId')}
+				</div>
 
 				{!id && (
 					<div>
