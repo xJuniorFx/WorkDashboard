@@ -8,6 +8,9 @@ export const usersApi = api.injectEndpoints({
 			query: () => 'users',
 			providesTags: ['Users'],
 		}),
+		getUserByCognitoId: build.query<User, string>({
+			query: (cognitoId) => `/users/${cognitoId}`,
+		}),
 		getAuthUser: build.query({
 			queryFn: async (_, _queryApi, _extraoption, fetchWithBQ) => {
 				try {
@@ -29,4 +32,8 @@ export const usersApi = api.injectEndpoints({
 	}),
 });
 
-export const { useGetUsersQuery, useGetAuthUserQuery } = usersApi;
+export const {
+	useGetUsersQuery,
+	useGetAuthUserQuery,
+	useGetUserByCognitoIdQuery,
+} = usersApi;
