@@ -72,13 +72,6 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	};
 
 	const onSubmit = async (data: FormData) => {
-		console.log('Form Data Raw:', data);
-		console.log(
-			'Author User ID:',
-			data.authorUserId,
-			'Assigned User ID:',
-			data.assignedUserId
-		);
 		const finalProjectId = id !== null ? Number(id) : Number(data.projectId);
 		await createTask({
 			...data,
@@ -90,7 +83,6 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 				? parseInt(data.assignedUserId)
 				: undefined,
 		});
-
 		reset();
 		onClose();
 	};
@@ -172,38 +164,21 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 					</div>
 				</div>
 				<div>
-					<select
-						{...register('assignedUserId')}
-						className={selectStyles}
-						disabled={isUsersLoading}
-						defaultValue=""
-					>
-						<option value="">Assigne a user</option>
-						{users?.map((user) => (
-							<option key={user.userId} value={user.userId.toString()}>
-								{user.username}
-							</option>
-						))}
-					</select>
-					{renderError('assignedUserId')}
-				</div>
-
-				<div>
-					<select
+					<input
+						type="number"
+						className={inputStyles}
+						placeholder="Author User ID"
 						{...register('authorUserId')}
-						className={selectStyles}
-						disabled={isUsersLoading}
-						defaultValue=""
-					>
-						<option value="">Select author</option>
-						{users?.map((user) => (
-							<option key={user.userId} value={user.userId.toString()}>
-								{user.username}
-							</option>
-						))}
-					</select>
+					/>
 					{renderError('authorUserId')}
 				</div>
+
+				<input
+					type="number"
+					className={inputStyles}
+					placeholder="Assigned User ID"
+					{...register('assignedUserId')}
+				/>
 
 				{!id && (
 					<div>
