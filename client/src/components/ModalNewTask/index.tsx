@@ -72,6 +72,13 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	};
 
 	const onSubmit = async (data: FormData) => {
+		console.log('Form Data Raw:', data);
+		console.log(
+			'Author User ID:',
+			data.authorUserId,
+			'Assigned User ID:',
+			data.assignedUserId
+		);
 		const finalProjectId = id !== null ? Number(id) : Number(data.projectId);
 		await createTask({
 			...data,
