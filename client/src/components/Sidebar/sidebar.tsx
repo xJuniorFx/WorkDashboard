@@ -16,10 +16,7 @@ import Image from 'next/image';
 import SidebarLink from './sidebarLink';
 import SidebarProjectsSection from './sidebarProjectsSection';
 import SidebarPrioritiesSection from './sidebarPrioritiesSection';
-import {
-	useGetAuthUserQuery,
-	useGetUserByCognitoIdQuery,
-} from '@/state/api/usersService';
+import { useGetAuthUserQuery } from '@/state/api/usersService';
 import { signOut } from 'aws-amplify/auth';
 
 const Sidebar = () => {
@@ -34,11 +31,6 @@ const Sidebar = () => {
 		} `;
 
 	const { data: currentUser } = useGetAuthUserQuery({});
-	const cognitoId = currentUser?.user?.userId || currentUser?.userSub;
-
-	const { data: dbUser } = useGetUserByCognitoIdQuery(cognitoId as string, {
-		skip: !cognitoId,
-	});
 	const handleSignOut = async () => {
 		try {
 			await signOut();
@@ -47,7 +39,9 @@ const Sidebar = () => {
 		}
 	};
 
-	if (!dbUser) return null;
+	if (!currentUser) return null;
+
+	const currentUserDetails = currentUser?.userDetails;
 
 	return (
 		<div className={sidebarClassNames}>
@@ -102,10 +96,10 @@ const Sidebar = () => {
 				<div className="z-10 mt-32 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 dark:bg-black md:hidden">
 					<div className="flex w-full items-center">
 						<div className="align-center flex h-9 w-9 justify-center">
-							{!!dbUser?.profilePictureUrl ? (
+							{!!currentUserDetails?.profilePictureUrl ? (
 								<Image
-									src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${dbUser?.profilePictureUrl}`}
-									alt={dbUser?.username || 'User Profile Picture'}
+									src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${currentUserDetails?.profilePictureUrl}`}
+									alt={currentUserDetails?.username || 'User Profile Picture'}
 									width={100}
 									height={50}
 									className="h-full rounded-full object-cover"
@@ -115,7 +109,7 @@ const Sidebar = () => {
 							)}
 						</div>
 						<span className="mx-3 text-gray-800 dark:text-white">
-							{dbUser?.username}
+							{currentUserDetails?.username}
 						</span>
 						<button
 							className="self-start rounded bg-[#1f2937] px-4 py-2 text-xs font-bold text-white hover:bg-[#9ba1a6] dark:bg-[#b1b3b7] dark:hover:bg-[#d0d2d5] md:block"

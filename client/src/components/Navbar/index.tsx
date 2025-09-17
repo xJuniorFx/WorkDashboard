@@ -6,10 +6,7 @@ import {
 	setIsDarkModeActive,
 	setIsSideBarCollapsed,
 } from '@/state/slices/globalSlice';
-import {
-	useGetAuthUserQuery,
-	useGetUserByCognitoIdQuery,
-} from '@/state/api/usersService';
+import { useGetAuthUserQuery } from '@/state/api/usersService';
 import { signOut } from 'aws-amplify/auth';
 import Image from 'next/image';
 
@@ -23,11 +20,6 @@ const Navbar = () => {
 	);
 
 	const { data: currentUser } = useGetAuthUserQuery({});
-	const cognitoId = currentUser?.user?.userId || currentUser?.userSub;
-
-	const { data: dbUser } = useGetUserByCognitoIdQuery(cognitoId as string, {
-		skip: !cognitoId,
-	});
 	const handleSignOut = async () => {
 		try {
 			await signOut();
@@ -36,7 +28,9 @@ const Navbar = () => {
 		}
 	};
 
-	if (!dbUser) return null;
+	if (!currentUser) return null;
+
+	const currentUserDetails = currentUser?.userDetails;
 
 	return (
 		<div className="flex items-center justify-between bg-white pl-8 pr-4 py-3 dark:bg-black">
@@ -83,10 +77,10 @@ const Navbar = () => {
 				<div className="ml-2 mr-5 hidden min-h-[2em] w-[0.1rem] bg-gray-200 md:inline-block"></div>
 				<div className="hidden items-center justify-between md:flex">
 					<div className="align-center flex h-9 w-9 justify-center">
-						{!!dbUser?.profilePictureUrl ? (
+						{!!currentUserDetails?.profilePictureUrl ? (
 							<Image
-								src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${dbUser?.profilePictureUrl}`}
-								alt={dbUser?.username || 'User Profile Picture'}
+								src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${currentUserDetails?.profilePictureUrl}`}
+								alt={currentUserDetails?.username || 'User Profile Picture'}
 								width={100}
 								height={50}
 								className="h-full rounded-full object-cover"
@@ -96,7 +90,7 @@ const Navbar = () => {
 						)}
 					</div>
 					<span className="mx-3 text-gray-800 dark:text-white">
-						{dbUser?.username}
+						{currentUserDetails?.username}
 					</span>
 					<button
 						className="hidden rounded bg-[#1f2937] px-4 py-2 text-xs font-bold text-white hover:bg-[#9ba1a6] dark:bg-[#b1b3b7] dark:hover:bg-[#d0d2d5] md:block"

@@ -7,10 +7,7 @@ import Header from '@/components/Header';
 import ModalNewTask from '@/components/ModalNewTask';
 import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
 import { useGetTasksByUserQuery } from '@/state/api/taskService';
-import {
-	useGetAuthUserQuery,
-	useGetUserByCognitoIdQuery,
-} from '@/state/api/usersService';
+import { useGetAuthUserQuery } from '@/state/api/usersService';
 import { Priority, Task } from '@/state/models/task';
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import { PlusSquare } from 'lucide-react';
@@ -83,16 +80,9 @@ const ReusablePriorityPage = ({ priority }: Props) => {
 	const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
 	const { data: currentUser } = useGetAuthUserQuery({});
-	const cognitoId = currentUser?.user?.userId || currentUser?.userSub;
-	const { data: dbUser } = useGetUserByCognitoIdQuery(cognitoId as string, {
-		skip: !cognitoId,
-	});
-
-	const userId = dbUser?.userId;
-
-	console.log('Cognito:', currentUser);
-	console.log('DB User:', dbUser);
-
+	const userId = currentUser?.userDetails?.userId;
+	console.log(userId);
+	console.log(currentUser);
 	const {
 		data: task,
 		isLoading,
