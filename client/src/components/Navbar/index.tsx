@@ -93,7 +93,7 @@ const Navbar = () => {
 						{currentUserDetails?.username}
 					</span>
 					<button
-						className="hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block"
+						className="hidden rounded bg-[#1f2937] px-4 py-2 text-xs font-bold text-white hover:bg-[#9ba1a6] dark:bg-[#b1b3b7] dark:hover:bg-[#d0d2d5] md:block"
 						onClick={handleSignOut}
 					>
 						Sign out
