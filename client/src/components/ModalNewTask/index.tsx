@@ -50,7 +50,6 @@ type FormData = z.infer<typeof taskSchema>;
 
 const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	const [createTask, { isLoading }] = useCreateTaskMutation();
-	const { data: users, isLoading: isUsersLoading } = useGetUsersQuery();
 
 	const {
 		register,
