@@ -83,6 +83,7 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 				? parseInt(data.assignedUserId)
 				: undefined,
 		});
+
 		reset();
 		onClose();
 	};
