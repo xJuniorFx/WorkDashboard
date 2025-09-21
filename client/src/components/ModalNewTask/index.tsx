@@ -50,6 +50,11 @@ type FormData = z.infer<typeof taskSchema>;
 
 const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 	const [createTask, { isLoading }] = useCreateTaskMutation();
+	const {
+		data: users,
+		isLoading: isUsersLoading,
+		isError,
+	} = useGetUsersQuery();
 
 	const {
 		register,
@@ -98,6 +103,9 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 
 	const selectStyles =
 		'mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none';
+
+	if (isLoading || isUsersLoading) return <div>Loading...</div>;
+	if (isError || !users) return <div>Error fetching users</div>;
 
 	return (
 		<Modal isOpen={isOpen} onClose={handleClose} name="Create New Task">
@@ -162,22 +170,30 @@ const ModalNewTask = ({ isOpen, onClose, id = null }: Props) => {
 						{renderError('dueDate')}
 					</div>
 				</div>
+				{/* Author */}
 				<div>
-					<input
-						type="number"
-						className={inputStyles}
-						placeholder="Author User ID"
-						{...register('authorUserId')}
-					/>
+					<select {...register('authorUserId')} className={selectStyles}>
+						<option value="">Select Author</option>
+						{users?.map((user) => (
+							<option key={user.userId} value={user.userId}>
+								{user.username}
+							</option>
+						))}
+					</select>
 					{renderError('authorUserId')}
 				</div>
 
-				<input
-					type="number"
-					className={inputStyles}
-					placeholder="Assigned User ID"
-					{...register('assignedUserId')}
-				/>
+				{/* Assignee */}
+				<div>
+					<select {...register('assignedUserId')} className={selectStyles}>
+						<option value="">Select Assignee (optional)</option>
+						{users?.map((user) => (
+							<option key={user.userId} value={user.userId}>
+								{user.username}
+							</option>
+						))}
+					</select>
+				</div>
 
 				{!id && (
 					<div>

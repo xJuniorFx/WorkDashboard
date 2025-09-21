@@ -47,8 +47,6 @@ const Users = () => {
 	if (isLoading) return <div>Loading...</div>;
 	if (isError || !users) return <div>Error fetching users</div>;
 
-	console.log(users);
-
 	return (
 		<div className="flex w-full flex-col p-8">
 			<Header name="Users" />

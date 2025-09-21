@@ -21,11 +21,11 @@ const Task = ({ task }: TaskProps) => {
 
 	const formattedStartDate = task.startDate
 		? format(new Date(task.startDate), 'P')
-		: '';
+		: null;
 
 	const formattedDueDate = task.dueDate
 		? format(new Date(task.dueDate), 'P')
-		: '';
+		: null;
 
 	const numberOfComments = (task.comments && task.comments.length) || 0;
 

@@ -29,6 +29,7 @@ export const createTask = async (
 	req: Request,
 	res: Response
 ): Promise<void> => {
+	console.log('Data of createTask:', req.body);
 	const {
 		title,
 		description,
@@ -42,6 +43,7 @@ export const createTask = async (
 		authorUserId,
 		assignedUserId,
 	} = req.body;
+
 	try {
 		const newTask = await prisma.task.create({
 			data: {
@@ -50,16 +52,17 @@ export const createTask = async (
 				status,
 				priority,
 				tags,
-				startDate,
-				dueDate,
-				points,
-				projectId,
-				authorUserId,
-				assignedUserId,
+				startDate: startDate ? new Date(startDate) : null,
+				dueDate: dueDate ? new Date(dueDate) : null,
+				points: points ? Number(points) : null,
+				projectId: Number(projectId),
+				authorUserId: Number(authorUserId),
+				assignedUserId: assignedUserId ? Number(assignedUserId) : null,
 			},
 		});
 		res.status(201).json(newTask);
 	} catch (error: any) {
+		console.error('❌ Erro while creating task:', error);
 		res.status(500).json({ message: `Error creating task: ${error.message}` });
 	}
 };
