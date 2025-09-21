@@ -21,6 +21,10 @@ const teamRoutes_1 = __importDefault(require("./routes/teamRoutes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json()); // Middleware to parse JSON request bodies
+app.use((req, res, next) => {
+    console.log('➡️ Request:', req.method, req.url, req.body);
+    next();
+});
 app.use((0, helmet_1.default)()); // Middleware to set security headers
 app.use(helmet_1.default.crossOriginResourcePolicy({ policy: 'cross-origin' })); // Cross-origin resource policy
 app.use((0, morgan_1.default)('common')); // Middleware to log HTTP requests in 'common' format
@@ -39,6 +43,12 @@ app.use('/teams', teamRoutes_1.default);
 /* SERVER CONFIGURATION */
 // Defining the server port from the environment variable (process.env.PORT), with fallback to 3000
 const port = Number(process.env.PORT) || 3000;
+app.use((err, req, res, next) => {
+    console.error('Erro:', err);
+    res
+        .status(500)
+        .json({ message: 'internal erro', error: err.message, stack: err.stack });
+});
 app.listen(port, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`); // Logging confirmation that the server is running
 });
