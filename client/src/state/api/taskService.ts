@@ -5,10 +5,12 @@ export const taskApi = api.injectEndpoints({
 	endpoints: (build) => ({
 		getTasks: build.query<Task[], { projectId: number }>({
 			query: ({ projectId }) => `tasks?projectId=${projectId}`,
-			providesTags: (result) =>
-				result
+			providesTags: (result, error, { projectId }) => [
+				{ type: 'Tasks', id: projectId },
+				...(result
 					? result.map(({ id }) => ({ type: 'Tasks' as const, id }))
-					: [{ type: 'Tasks' as const }],
+					: []),
+			],
 		}),
 		getTasksByUser: build.query<Task[], number>({
 			query: (userId) => `tasks/user/${userId}`,
@@ -23,16 +25,20 @@ export const taskApi = api.injectEndpoints({
 				method: 'POST',
 				body: task,
 			}),
-			invalidatesTags: ['Tasks'],
+			invalidatesTags: (result, error, task) =>
+				task?.projectId ? [{ type: 'Tasks', id: task.projectId }] : ['Tasks'],
 		}),
-		updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
+		updateTaskStatus: build.mutation<
+			Task,
+			{ taskId: number; status: string; projectId: number }
+		>({
 			query: ({ taskId, status }) => ({
 				url: `tasks/${taskId}/status`,
 				method: 'PATCH',
 				body: { status },
 			}),
-			invalidatesTags: (result, error, { taskId }) => [
-				{ type: 'Tasks', id: taskId },
+			invalidatesTags: (result, error, { projectId }) => [
+				{ type: 'Tasks', id: projectId },
 			],
 		}),
 	}),
