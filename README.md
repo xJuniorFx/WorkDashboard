@@ -21,7 +21,7 @@ Built with the latest technologies like **React**, **TypeScript**, and **NodeJS*
 <img align="left" alt="NodeJS" width="35px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>
 <img align="left" alt="Git" width="35px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"/>
 <br>  
-<br>  
+<br>
 
 ---
 
@@ -40,11 +40,15 @@ Built with the latest technologies like **React**, **TypeScript**, and **NodeJS*
 <a href="https://www.linkedin.com/in/juniorfs/" target="_blank">
   <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank">
 </a>  
+<br>
 <a href="https://github.com/xJuniorFx" target="_blank">
   <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
-</a>  
+</a>
 
 ---
 
-### 🌐 Check out my portfolio  
+### 🌐 Check out my portfolio
+
 🔗 **[Portfolio](https://xjuniorfx.github.io/Portfolio/)**
+
+🔗 **[Live Version](https://main.d1j1foeipdmbxm.amplifyapp.com/)**
