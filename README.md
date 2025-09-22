@@ -39,8 +39,8 @@ Built with the latest technologies like **React**, **TypeScript**, and **NodeJS*
 
 <a href="https://www.linkedin.com/in/juniorfs/" target="_blank">
   <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank">
-</a>  
-<br>
+</a>
+
 <a href="https://github.com/xJuniorFx" target="_blank">
   <img src="https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
 </a>
